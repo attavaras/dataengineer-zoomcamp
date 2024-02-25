@@ -13,8 +13,8 @@ renamed as (
         pickup_datetime,
         {{ date_trunc("year", "pickup_datetime") }}  as pickup_year,
         dropoff_datetime,
-        pulocationid,
-        dolocationid,
+        pulocationid as pickup_locationid,
+        dolocationid as dropoff_locationid,
         sr_flag,
         affiliated_base_number
 
