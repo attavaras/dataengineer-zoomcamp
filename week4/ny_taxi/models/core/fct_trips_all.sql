@@ -21,6 +21,7 @@ fhv_tripdata as (
 ),
 trips_unioned as (
     select green_tripdata.tripid,
+        green_tripdata.service_type,
         green_tripdata.pickup_datetime,
         green_tripdata.dropoff_datetime,
         green_tripdata.pickup_locationid,
@@ -28,12 +29,14 @@ trips_unioned as (
             from green_tripdata
     union all 
     select yellow_tripdata.tripid,
+        yellow_tripdata.service_type,
         yellow_tripdata.pickup_datetime,
         yellow_tripdata.dropoff_datetime,
         yellow_tripdata.pickup_locationid,
         yellow_tripdata.dropoff_locationid from yellow_tripdata
     union all 
     select fhv_tripdata.tripid,
+        fhv_tripdata.service_type,
         fhv_tripdata.pickup_datetime,
         fhv_tripdata.dropoff_datetime,
         fhv_tripdata.pickup_locationid,
@@ -45,6 +48,7 @@ dim_zones as (
     where borough != 'Unknown'
 )
 select trips_unioned.tripid,
+        trips_unioned.service_type,
         trips_unioned.pickup_datetime,
         trips_unioned.dropoff_datetime,
         trips_unioned.pickup_locationid,
