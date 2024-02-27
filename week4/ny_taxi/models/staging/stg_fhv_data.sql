@@ -9,10 +9,12 @@ source as (
 renamed as (
 
     select
+        {{ dbt_utils.generate_surrogate_key(['pulocationid', 'pickup_datetime']) }} as tripid,
         dispatching_base_num,
-        pickup_datetime,
+        -- timestamps
+        cast(pickup_datetime as timestamp) as pickup_datetime,
+        cast(dropoff_datetime as timestamp) as dropoff_datetime,
         {{ date_trunc("year", "pickup_datetime") }}  as pickup_year,
-        dropoff_datetime,
         pulocationid as pickup_locationid,
         dolocationid as dropoff_locationid,
         sr_flag,
