@@ -12,7 +12,8 @@ dim_zones as (
     select * from {{ ref('dim_zones') }}
     where borough != 'Unknown'
 )
-select fhv_data.dispatching_base_num,
+select  fhv_data.tripid,
+        fhv_data.dispatching_base_num,
         fhv_data.pickup_datetime,
         fhv_data.pickup_year,
         fhv_data.dropoff_datetime,
